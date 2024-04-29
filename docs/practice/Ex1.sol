@@ -81,3 +81,55 @@ contract Ex3{
         }
     }
 
+contract Ex4{
+    struct Human{
+        uint age;
+        string name;
+        string job;
+    }
+
+    Human public human1 = Human(22, 'sol','dr');
+    // human1의 자료형은 Human이다. 구조체 내부에 정의된 변수의 순서에 맞게 입력해야 함.
+
+     Human public human2;
+     // human2는 아무 값도 입력하지 않았다. 자료형 Humand의 기본값으로 저장된다.
+
+     // Human 자료형은 참조 타입
+     // 때문에 함수 내부에서는 memoryd와 같은 저장 공간을 명시해야 한다.
+
+     function getH1() public view returns(Human memory){
+        return human1;
+     }
+
+     function getH2() public view returns(Human memory){
+        return human2;
+     }
+
+     function newH2(uint _age, string memory _name, string memory _job) public {
+        human2 = Human(_age,_name,_job);
+        // 빈곳에 데이터 집어넣는 함수
+     }
+
+     function changeH1Job(string memory _job) public {
+        human1.job = _job;
+        // 직업 변경 함수
+     }
+}
+
+/*
+// human1
+0 : uint256: age 22,
+1: string: name sol,
+2: string: job dr,
+
+// human2
+0: uint256:age 0,
+1: string: name,
+2: string: job,
+
+// getH1
+0: tuple(uint256,string,string): 22,sol,dr
+
+// getH2
+0 : tuple(uint,string,string): 0,,
+*/
